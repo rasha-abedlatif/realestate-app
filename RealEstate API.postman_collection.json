@@ -1,0 +1,273 @@
+{
+  "info": {
+    "_postman_id": "9b461e0c-8bd5-4951-ab82-0bb6e1dabf00",
+    "name": "RealEstate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47287173",
+    "_collection_link": "https://go.postman.co/collection/47287173-9b461e0c-8bd5-4951-ab82-0bb6e1dabf00?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"superadmin@test.com\",\r\n    \"password\": \"admin123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET admins",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4MDQ4NDI1MCwianRpIjoiZmU3ZGVlYWUtMTRmZi00YmRhLWIzMDItYzE1NGFiMGIwMDIxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODA0ODQyNTAsImNzcmYiOiI1YWFhMjA0Zi00NDk1LTQ3MTctOWQ4ZC0yNDg4Zjg3NDVjMDUiLCJleHAiOjE3ODA0ODUxNTAsInJvbGUiOiJzdXBlcl9hZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB0ZXN0LmNvbSIsIm5hbWUiOiJTdXBlciBBZG1pbiJ9.DUi3_bBcR4ZDKtQpDOcH6TQDiv2p5mHOOi32IaSCuck",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/admins",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "admins"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Admin",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4MDQ4NDI1MCwianRpIjoiZmU3ZGVlYWUtMTRmZi00YmRhLWIzMDItYzE1NGFiMGIwMDIxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODA0ODQyNTAsImNzcmYiOiI1YWFhMjA0Zi00NDk1LTQ3MTctOWQ4ZC0yNDg4Zjg3NDVjMDUiLCJleHAiOjE3ODA0ODUxNTAsInJvbGUiOiJzdXBlcl9hZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB0ZXN0LmNvbSIsIm5hbWUiOiJTdXBlciBBZG1pbiJ9.DUi3_bBcR4ZDKtQpDOcH6TQDiv2p5mHOOi32IaSCuck",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"civility\": \"Mr\",\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"email\": \"john.doe@test.com\",\r\n    \"phone\": \"1234567890\",\r\n    \"role\": \"complex_admin\",\r\n    \"status\": \"active\",\r\n    \"password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/admins",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "admins"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Complexes",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4MDQ4NTI1OSwianRpIjoiM2FjNzNkM2ItYjFjZS00ZWFjLTg2MGEtNzEwYjk1ZDdhMDk0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODA0ODUyNTksImNzcmYiOiJlYmYwZGQwMC1jZGU0LTQwODktYWY5ZS0xYzcwYTlkYzgwY2EiLCJleHAiOjE3ODA0ODYxNTksInJvbGUiOiJzdXBlcl9hZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB0ZXN0LmNvbSIsIm5hbWUiOiJTdXBlciBBZG1pbiJ9.OGH0RQG827h_bOd79MqKG7y3gP-3LOSZ9FwhWgheW1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/complexes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "complexes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Complex",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4MDQ4NTI1OSwianRpIjoiM2FjNzNkM2ItYjFjZS00ZWFjLTg2MGEtNzEwYjk1ZDdhMDk0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODA0ODUyNTksImNzcmYiOiJlYmYwZGQwMC1jZGU0LTQwODktYWY5ZS0xYzcwYTlkYzgwY2EiLCJleHAiOjE3ODA0ODYxNTksInJvbGUiOiJzdXBlcl9hZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB0ZXN0LmNvbSIsIm5hbWUiOiJTdXBlciBBZG1pbiJ9.OGH0RQG827h_bOd79MqKG7y3gP-3LOSZ9FwhWgheW1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"identity\": \"Complex Alpha\",\r\n    \"address\": \"123 Main Street, Beirut\",\r\n    \"campaign_info\": \"Summer 2024 Campaign\",\r\n    \"admin_civility\": \"Mr\",\r\n    \"admin_first_name\": \"Carlos\",\r\n    \"admin_last_name\": \"Silva\",\r\n    \"admin_email\": \"carlos.silva@test.com\",\r\n    \"admin_phone\": \"9876543210\",\r\n    \"admin_password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/complexes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "complexes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Buildings",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4MDQ4NTI1OSwianRpIjoiM2FjNzNkM2ItYjFjZS00ZWFjLTg2MGEtNzEwYjk1ZDdhMDk0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODA0ODUyNTksImNzcmYiOiJlYmYwZGQwMC1jZGU0LTQwODktYWY5ZS0xYzcwYTlkYzgwY2EiLCJleHAiOjE3ODA0ODYxNTksInJvbGUiOiJzdXBlcl9hZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB0ZXN0LmNvbSIsIm5hbWUiOiJTdXBlciBBZG1pbiJ9.OGH0RQG827h_bOd79MqKG7y3gP-3LOSZ9FwhWgheW1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/buildings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "buildings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Building",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4MDQ4NTI1OSwianRpIjoiM2FjNzNkM2ItYjFjZS00ZWFjLTg2MGEtNzEwYjk1ZDdhMDk0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODA0ODUyNTksImNzcmYiOiJlYmYwZGQwMC1jZGU0LTQwODktYWY5ZS0xYzcwYTlkYzgwY2EiLCJleHAiOjE3ODA0ODYxNTksInJvbGUiOiJzdXBlcl9hZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB0ZXN0LmNvbSIsIm5hbWUiOiJTdXBlciBBZG1pbiJ9.OGH0RQG827h_bOd79MqKG7y3gP-3LOSZ9FwhWgheW1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Building A\",\r\n    \"complex_id\": 1,\r\n    \"admin_civility\": \"Mrs\",\r\n    \"admin_first_name\": \"Sara\",\r\n    \"admin_last_name\": \"Johnson\",\r\n    \"admin_email\": \"sara.johnson@test.com\",\r\n    \"admin_phone\": \"5551234567\",\r\n    \"admin_password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/buildings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "buildings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Building",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4MDQ4NTI1OSwianRpIjoiM2FjNzNkM2ItYjFjZS00ZWFjLTg2MGEtNzEwYjk1ZDdhMDk0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODA0ODUyNTksImNzcmYiOiJlYmYwZGQwMC1jZGU0LTQwODktYWY5ZS0xYzcwYTlkYzgwY2EiLCJleHAiOjE3ODA0ODYxNTksInJvbGUiOiJzdXBlcl9hZG1pbiIsImVtYWlsIjoic3VwZXJhZG1pbkB0ZXN0LmNvbSIsIm5hbWUiOiJTdXBlciBBZG1pbiJ9.OGH0RQG827h_bOd79MqKG7y3gP-3LOSZ9FwhWgheW1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/buildings/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "buildings",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
