@@ -35,12 +35,12 @@
   </nav>
 
   <div class="p-8">
-    <!-- HEADER -->
+    
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold" style="color: #363c46">Buildings</h2>
 
       <div class="flex gap-2">
-        <!-- BACK BUTTON (RESTORED) -->
+      
         <button
           *ngIf="showForm"
           (click)="showForm = false; resetForm()"
@@ -50,7 +50,7 @@
           ← Back
         </button>
 
-        <!-- ADD BUTTON -->
+        
         <button
           *ngIf="!showForm && (isSuperAdmin || isComplexAdmin)"
           (click)="showForm = true; resetForm()"
