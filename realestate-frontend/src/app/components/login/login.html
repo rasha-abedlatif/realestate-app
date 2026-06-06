@@ -1,0 +1,49 @@
+<div class="min-h-screen flex items-center justify-center" style="background-color: #e0eee9">
+  <div class="bg-white rounded-2xl shadow-lg p-10 w-full max-w-md">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold" style="color: #363c46">RealEstate</h1>
+      <p class="text-sm mt-1" style="color: #5d6472">Admin Portal</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="mb-4 p-3 rounded-lg bg-red-100 text-red-600 text-sm">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onLogin()">
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1" style="color: #363c46">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          placeholder="Enter your email"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
+          style="border-color: #CFB6A8; border-color: #CFB6A8;"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm font-medium mb-1" style="color: #363c46">Password</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          placeholder="Enter your password"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
+          style="border-color: #cfb6a8"
+        />
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full py-2 rounded-lg text-white font-semibold transition"
+        style="background-color: #363c46"
+      >
+        {{ loading ? 'Logging in...' : 'Login' }}
+      </button>
+    </form>
+  </div>
+</div>

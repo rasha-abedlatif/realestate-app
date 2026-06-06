@@ -1,0 +1,297 @@
+<div class="min-h-screen" style="background-color: #e0eee9">
+  <nav
+    class="shadow-md px-8 py-4 flex justify-between items-center"
+    style="background-color: #363c46"
+  >
+    <h1 class="text-xl font-bold text-white">RealEstate Admin</h1>
+
+    <div class="flex items-center gap-6">
+      <a routerLink="/dashboard" class="text-sm font-medium text-[#cfb6a8] hover:opacity-80">
+        Dashboard
+      </a>
+
+      <a
+        *ngIf="isSuperAdmin"
+        routerLink="/admins"
+        class="text-sm font-medium text-[#cfb6a8] hover:opacity-80"
+      >
+        Admins
+      </a>
+
+      <a routerLink="/complexes" class="text-sm font-medium text-[#cfb6a8] hover:opacity-80">
+        Complexes
+      </a>
+
+      <a
+        routerLink="/buildings"
+        (click)="showForm = false; resetForm()"
+        class="text-sm font-medium text-[#cfb6a8] hover:opacity-80"
+      >
+        Buildings
+      </a>
+
+      <button (click)="logout()" class="text-white text-sm">Logout</button>
+    </div>
+  </nav>
+
+  <div class="p-8">
+    <!-- HEADER -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold" style="color: #363c46">Buildings</h2>
+
+      <div class="flex gap-2">
+        <!-- BACK BUTTON (RESTORED) -->
+        <button
+          *ngIf="showForm"
+          (click)="showForm = false; resetForm()"
+          class="px-4 py-2 rounded-lg text-white"
+          style="background-color: #5d6472"
+        >
+          ← Back
+        </button>
+
+        <!-- ADD BUTTON -->
+        <button
+          *ngIf="!showForm && (isSuperAdmin || isComplexAdmin)"
+          (click)="showForm = true; resetForm()"
+          class="px-4 py-2 rounded-lg text-white"
+          style="background-color: #363c46"
+        >
+          + Add Building
+        </button>
+      </div>
+    </div>
+
+    <!-- ERRORS -->
+    <div *ngIf="loadError" class="text-red-500 mb-3">{{ loadError }}</div>
+    <div *ngIf="deleteError" class="text-red-500 mb-3">{{ deleteError }}</div>
+    <div *ngIf="deleteSuccess" class="text-green-600 mb-3">{{ deleteSuccess }}</div>
+
+    <!-- FORM -->
+    <div *ngIf="showForm" class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h3 class="text-lg font-bold mb-4" style="color: #363c46">New Building</h3>
+
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Building Name -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">Building Name</label>
+          <input
+            [(ngModel)]="newBuilding.name"
+            type="text"
+            class="w-full border rounded-lg px-3 py-2"
+            style="border-color: #cfb6a8"
+          />
+        </div>
+
+        <!-- Complex -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">Complex</label>
+          <select
+            [(ngModel)]="newBuilding.complex_id"
+            class="w-full border rounded-lg px-3 py-2"
+            style="border-color: #cfb6a8"
+          >
+            <option *ngFor="let c of formComplexes" [value]="c.id">
+              {{ c.identity }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Civility -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">Civility</label>
+          <select
+            [(ngModel)]="newBuilding.admin_civility"
+            class="w-full border rounded-lg px-3 py-2"
+            style="border-color: #cfb6a8"
+          >
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Ms">Ms</option>
+          </select>
+        </div>
+
+        <!-- First Name -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">First Name</label>
+          <input
+            [(ngModel)]="newBuilding.admin_first_name"
+            type="text"
+            autocomplete="off"
+            class="w-full border rounded-lg px-3 py-2"
+            style="border-color: #cfb6a8"
+          />
+        </div>
+
+        <!-- Last Name -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">Last Name</label>
+          <input
+            [(ngModel)]="newBuilding.admin_last_name"
+            type="text"
+            autocomplete="off"
+            class="w-full border rounded-lg px-3 py-2"
+            style="border-color: #cfb6a8"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">Email</label>
+          <input
+            [(ngModel)]="newBuilding.admin_email"
+            type="email"
+            autocomplete="off"
+            class="w-full border rounded-lg px-3 py-2"
+            style="border-color: #cfb6a8"
+          />
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">Phone</label>
+          <div class="flex border rounded-lg overflow-hidden" style="border-color: #cfb6a8">
+            <select
+              [(ngModel)]="newBuilding.admin_phoneCode"
+              (change)="onPhoneInput()"
+              class="px-2 py-2 text-sm outline-none border-r"
+              style="background-color: #f9f9f9; border-color: #cfb6a8; color: #363c46"
+            >
+              <option value="+961">🇱🇧 +961</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+971">🇦🇪 +971</option>
+              <option value="+966">🇸🇦 +966</option>
+              <option value="+962">🇯🇴 +962</option>
+              <option value="+963">🇸🇾 +963</option>
+              <option value="+20">🇪🇬 +20</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+90">🇹🇷 +90</option>
+              <option value="+30">🇬🇷 +30</option>
+            </select>
+
+            <input
+              [(ngModel)]="newBuilding.admin_phoneNumber"
+              (input)="onPhoneInput()"
+              (keypress)="onlyNumbers($event)"
+              [maxlength]="getBuildingPhoneMaxLength()"
+              type="tel"
+              placeholder="XX XXX XXX"
+              autocomplete="tel"
+              class="flex-1 px-3 py-2 text-sm outline-none"
+              style="color: #363c46"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label class="block text-sm mb-1" style="color: #5d6472">Password</label>
+          <input
+            [(ngModel)]="newBuilding.admin_password"
+            type="password"
+            autocomplete="new-password"
+            class="w-full border rounded-lg px-3 py-2"
+            style="border-color: #cfb6a8"
+          />
+        </div>
+      </div>
+
+      <!-- Validation Error Message -->
+      <div
+        *ngIf="formError"
+        class="mt-4 p-3 rounded-lg border text-sm"
+        style="background-color: #fff5f5; border-color: #e74c3c; color: #c0392b"
+      >
+        <p class="font-semibold mb-1">⚠️ Error</p>
+
+        <!-- show backend error -->
+        <p *ngIf="missingFields.length === 0">
+          {{ formError }}
+        </p>
+
+        <!-- show validation missing fields -->
+        <ul *ngIf="missingFields.length > 0" class="list-disc list-inside space-y-1">
+          <li *ngFor="let field of missingFields">{{ field }}</li>
+        </ul>
+      </div>
+
+      <button
+        (click)="createBuilding()"
+        class="mt-4 px-6 py-2 rounded-lg text-white font-semibold"
+        style="background-color: #cfb6a8"
+      >
+        Save Building
+      </button>
+    </div>
+
+    <!-- FILTER -->
+    <div *ngIf="!showForm" class="mb-4">
+      <label class="block text-sm mb-1" style="color: #5d6472"> Filter by Complex </label>
+
+      <select
+        [(ngModel)]="filterComplexId"
+        (change)="loadBuildings()"
+        class="border rounded-lg px-3 py-2"
+        style="border-color: #cfb6a8"
+      >
+        <option [ngValue]="0">All Complexes</option>
+
+        <option *ngFor="let complex of complexes" [ngValue]="complex.id">
+          {{ complex.identity }}
+        </option>
+      </select>
+    </div>
+
+    <!-- TABLE -->
+    <div *ngIf="!showForm" class="bg-white rounded-2xl shadow overflow-hidden">
+      <table class="w-full text-sm">
+        <thead style="background: #363c46; color: white">
+          <tr>
+            <th class="p-3 text-left">Name</th>
+            <th class="p-3 text-left">Complex</th>
+            <th class="p-3 text-left">Admin</th>
+            <th class="p-3 text-left">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngIf="buildings.length === 0">
+            <td colspan="4" class="p-4 text-center text-gray-500">No buildings found</td>
+          </tr>
+
+          <tr *ngFor="let building of buildings" class="border-t hover:bg-gray-50">
+            <td class="p-3">{{ building.name }}</td>
+            <td class="p-3">{{ building.complex_name }}</td>
+            <td class="p-3">{{ building.first_name }} {{ building.last_name }}</td>
+
+            <td class="p-3">
+              <button
+                *ngIf="isSuperAdmin || (isComplexAdmin && building.complex_id === userComplexId)"
+                (click)="deleteBuilding(building)"
+                class="px-3 py-1 text-white rounded text-xs"
+                style="background: #e74c3c"
+              >
+                Delete
+              </button>
+
+              <button
+                *ngIf="!(isSuperAdmin || (isComplexAdmin && building.complex_id === userComplexId))"
+                disabled
+                class="px-3 py-1 text-white rounded text-xs opacity-40 cursor-not-allowed"
+                style="background: #e74c3c"
+              >
+                Locked
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
